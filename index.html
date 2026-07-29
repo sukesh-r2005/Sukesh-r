@@ -1,44 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Home - My Blog</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header>
     <h1>My Blog Website</h1>
 </header>
 
+
 <nav>
     <a href="index.html">Home</a>
     <a href="blog.html">Blog</a>
 </nav>
 
+
 <div class="container">
-    <h2>Welcome</h2>
-    <p>Welcome to my simple blog website created using HTML and CSS.</p>
 
-    <button>Read More</button>
+    <h2>Add New Blog</h2>
 
-    <h2>Contact Us</h2>
+    <form id="blogForm">
 
-    <form>
-        <input type="text" placeholder="Enter your name" required>
+        <input type="text" id="title" placeholder="Blog Title">
 
-        <input type="email" placeholder="Enter your email" required>
+        <input type="text" id="author" placeholder="Author Name">
 
-        <textarea placeholder="Enter your message"></textarea>
+        <textarea id="content" placeholder="Write your blog content"></textarea>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Add Blog</button>
+
     </form>
+
+    <p id="message"></p>
+
+
 </div>
 
+
 <footer>
-    <p>&copy; 2026 My Blog Website</p>
+    <p>© 2026 My Blog Website</p>
 </footer>
 
+
+<script src="script.js"></script>
+
 </body>
+
 </html>
