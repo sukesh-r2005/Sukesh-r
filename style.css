@@ -1,163 +1,42 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
-
-
 body{
-    background:#f4f4f4;
-}
 
+font-family:Arial;
 
+background:#f4f4f4;
 
-/* Header */
+text-align:center;
 
-header{
-
-    background:#2c3e50;
-    color:white;
-    text-align:center;
-    padding:25px;
+margin-top:50px;
 
 }
 
-
-
-/* Navigation */
-
-nav{
-
-    background:#34495e;
-    padding:15px;
-    text-align:center;
-
-}
-
-
-nav a{
-
-    color:white;
-    text-decoration:none;
-    margin:20px;
-    font-size:18px;
-
-}
-
-
-nav a:hover{
-
-    color:#f1c40f;
-
-}
-
-
-
-/* Container */
-
-.container{
-
-    width:80%;
-    margin:30px auto;
-
-}
-
-
-
-/* Form */
-
-form{
-
-    background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0 0 10px gray;
-
-}
-
-
-input, textarea{
-
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border:1px solid #ccc;
-    border-radius:5px;
-
-}
-
-
+input,
 textarea{
 
-    height:120px;
+width:300px;
+
+padding:10px;
+
+margin:10px;
 
 }
-
-
-
-/* Button */
 
 button{
 
-    background:#3498db;
-    color:white;
-    border:none;
-    padding:12px 25px;
-    border-radius:5px;
-    cursor:pointer;
+padding:10px 20px;
+
+background:#007BFF;
+
+color:white;
+
+border:none;
+
+cursor:pointer;
 
 }
-
 
 button:hover{
 
-    background:#2980b9;
-
-}
-
-
-
-/* Message */
-
-#message{
-
-    margin-top:15px;
-    font-weight:bold;
-
-}
-
-
-
-/* Blog Cards */
-
-.card{
-
-    background:white;
-    padding:20px;
-    margin:20px 0;
-    border-radius:10px;
-    box-shadow:0 0 10px gray;
-
-}
-
-
-.card h2{
-
-    color:#2c3e50;
-
-}
-
-
-
-/* Footer */
-
-footer{
-
-    background:#2c3e50;
-    color:white;
-    text-align:center;
-    padding:15px;
-    margin-top:30px;
+background:#0056b3;
 
 }

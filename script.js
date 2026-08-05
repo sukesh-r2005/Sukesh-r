@@ -1,55 +1,42 @@
-// Select form and message area
+const btn = document.getElementById("btn");
+
+btn.addEventListener("click", () => {
+
+alert("Welcome to Express!");
+
+});
 
 const form = document.getElementById("blogForm");
 
-const message = document.getElementById("message");
+form.addEventListener("submit", function(e){
 
+e.preventDefault();
 
-// Add submit event
+const title = document.getElementById("title").value;
 
-form.addEventListener("submit", function(event){
+const content = document.getElementById("content").value;
 
-    // Stop page refresh
+fetch("/blogs",{
 
-    event.preventDefault();
+method:"POST",
 
+headers:{
+"Content-Type":"application/json"
+},
 
-    // Get input values
+body:JSON.stringify({
+title,
+content
+})
 
-    const title = document.getElementById("title").value.trim();
+})
+.then(response=>response.json())
+.then(data=>{
 
-    const author = document.getElementById("author").value.trim();
+document.getElementById("message").innerHTML=data.message;
 
-    const content = document.getElementById("content").value.trim();
+form.reset();
 
-
-
-    // Validation
-
-    if(title === "" || author === "" || content === ""){
-
-
-        message.innerHTML = "❌ Please fill all fields";
-
-        message.style.color = "red";
-
-
-    }
-
-    else{
-
-
-        message.innerHTML = "✅ Blog added successfully!";
-
-        message.style.color = "green";
-
-
-        // Clear form
-
-        form.reset();
-
-
-    }
-
+});
 
 });

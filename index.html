@@ -1,55 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - My Blog</title>
+    <title>Express Blog</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header>
-    <h1>My Blog Website</h1>
-</header>
+<h1>Express.js Blog Website</h1>
 
+<p>Day 5 Express Server</p>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="blog.html">Blog</a>
-</nav>
+<button id="btn">
+Click Me
+</button>
 
+<h2>Add Blog</h2>
 
-<div class="container">
+<form id="blogForm">
 
-    <h2>Add New Blog</h2>
+<input
+type="text"
+id="title"
+placeholder="Blog Title">
 
-    <form id="blogForm">
+<br><br>
 
-        <input type="text" id="title" placeholder="Blog Title">
+<textarea
+id="content"
+placeholder="Blog Content">
+</textarea>
 
-        <input type="text" id="author" placeholder="Author Name">
+<br><br>
 
-        <textarea id="content" placeholder="Write your blog content"></textarea>
+<button type="submit">
+Submit Blog
+</button>
 
-        <button type="submit">Add Blog</button>
+</form>
 
-    </form>
-
-    <p id="message"></p>
-
-
-</div>
-
-
-<footer>
-    <p>© 2026 My Blog Website</p>
-</footer>
-
+<p id="message"></p>
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
