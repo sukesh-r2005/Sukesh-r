@@ -3,42 +3,55 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 
-// Parse JSON requests
+// Middleware
 app.use(express.json());
-
-// Serve static files from the current folder
 app.use(express.static(__dirname));
+
+// Store blogs in a JavaScript array
+let blogs = [
+    {
+        id: 1,
+        title: "My First Blog",
+        content: "Learning Express.js"
+    }
+];
 
 // Home page
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
-// GET route
+// GET all blogs
 app.get("/blogs", (req, res) => {
-    res.json([
-        {
-            id: 1,
-            title: "My First Blog",
-            content: "Learning Express.js"
-        }
-    ]);
+    res.json(blogs);
 });
 
-// POST route
+// POST - Add a blog
 app.post("/blogs", (req, res) => {
+
     const { title, content } = req.body;
 
-    res.json({
+    if (!title || !content) {
+        return res.status(400).json({
+            message: "Please fill all fields."
+        });
+    }
+
+    const newBlog = {
+        id: blogs.length + 1,
+        title,
+        content
+    };
+
+    blogs.push(newBlog);
+
+    res.status(201).json({
         message: "Blog added successfully!",
-        blog: {
-            title,
-            content
-        }
+        blog: newBlog
     });
+
 });
 
-// Start server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });

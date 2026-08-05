@@ -8,15 +8,45 @@ alert("Welcome to Express!");
 
 const form = document.getElementById("blogForm");
 
-form.addEventListener("submit", function(e){
+const blogList = document.getElementById("blogList");
+
+const message = document.getElementById("message");
+
+// Load blogs
+async function loadBlogs(){
+
+const response = await fetch("/blogs");
+
+const blogs = await response.json();
+
+blogList.innerHTML = "";
+
+blogs.forEach(blog=>{
+
+blogList.innerHTML += `
+<div class="blog">
+<h3>${blog.title}</h3>
+<p>${blog.content}</p>
+</div>
+`;
+
+});
+
+}
+
+loadBlogs();
+
+// Add blog
+
+form.addEventListener("submit",async function(e){
 
 e.preventDefault();
 
-const title = document.getElementById("title").value;
+const title=document.getElementById("title").value.trim();
 
-const content = document.getElementById("content").value;
+const content=document.getElementById("content").value.trim();
 
-fetch("/blogs",{
+const response=await fetch("/blogs",{
 
 method:"POST",
 
@@ -29,14 +59,14 @@ title,
 content
 })
 
-})
-.then(response=>response.json())
-.then(data=>{
+});
 
-document.getElementById("message").innerHTML=data.message;
+const data=await response.json();
+
+message.innerHTML=data.message;
 
 form.reset();
 
-});
+loadBlogs();
 
 });
