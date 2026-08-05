@@ -1,49 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Day 6 Blog</title>
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Home - View Blogs</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<h1>Express Blog Website</h1>
+<header>
 
-<p>Create Blog Posts</p>
+<nav>
 
-<button id="btn">Click Me</button>
+<a href="/">Home</a>
 
-<h2>Add Blog</h2>
+<a href="/blog">Blog</a>
 
-<form id="blogForm">
+</nav>
 
-<input
-type="text"
-id="title"
-placeholder="Blog Title">
+</header>
 
-<br><br>
+<section class="hero">
 
-<textarea
-id="content"
-placeholder="Blog Content">
-</textarea>
+<h1>Welcome to My Blog Website</h1>
 
-<br><br>
+<p>Read all blog posts below.</p>
 
-<button type="submit">
-Submit Blog
-</button>
+</section>
 
-</form>
+<section>
 
-<p id="message"></p>
+<h2>Latest Blog Posts</h2>
 
-<h2>All Blogs</h2>
+<div id="blogList">
 
-<div id="blogList"></div>
+<!-- Blogs will appear here -->
+
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 My Blog. All Rights Reserved.</p>
+
+</footer>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>

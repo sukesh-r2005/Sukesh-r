@@ -2,72 +2,71 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogs</title>
-    <link rel="stylesheet" href="style.css">
-</head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Blog</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
 
 <body>
 
-
 <header>
-    <h1>My Blog Website</h1>
-</header>
-
 
 <nav>
-    <a href="index.html">Home</a>
-    <a href="blog.html">Blog</a>
+
+<a href="/">Home</a>
+
+<a href="/blog">Blog</a>
+
 </nav>
 
+</header>
 
+<section class="container">
 
-<div class="container">
+<h1>Add a New Blog</h1>
 
+<p>Create and publish a new blog post.</p>
 
-    <div class="card">
+<form id="blogForm">
 
-        <h2>Web Development</h2>
+<input
+type="text"
+id="title"
+placeholder="Enter Blog Title"
+required>
 
-        <p>
-            Learning HTML, CSS and JavaScript helps to build modern websites.
-        </p>
+<br><br>
 
-        <button>Read More</button>
+<textarea
+id="content"
+rows="6"
+placeholder="Enter Blog Content"
+required></textarea>
 
-    </div>
+<br><br>
 
+<button type="submit">
+Add Blog
+</button>
 
+</form>
 
-    <div class="card">
+<p id="message"></p>
 
-        <h2>Frontend Development</h2>
-
-        <p>
-            CSS improves website design and JavaScript adds interaction.
-        </p>
-
-        <button>Read More</button>
-
-    </div>
-
-
-
-</div>
-
-
+</section>
 
 <footer>
 
-    <p>© 2026 My Blog Website</p>
+<p>© 2026 My Blog. All Rights Reserved.</p>
 
 </footer>
 
-
 <script src="script.js"></script>
-
 
 </body>
 
