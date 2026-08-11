@@ -6,10 +6,10 @@ const PORT = 3000;
 // Middleware
 app.use(express.json());
 
-// Serve HTML, CSS and JavaScript files
+// Serve frontend files
 app.use(express.static(__dirname));
 
-// Blog posts stored in a JavaScript array
+// In-memory blog data
 let blogs = [
     {
         id: 1,
@@ -20,18 +20,15 @@ let blogs = [
 
 
 // ==========================================
-// HOME PAGE
+// FRONTEND PAGES
 // ==========================================
 
+// Home page
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
-
-// ==========================================
-// BLOG PAGE
-// ==========================================
-
+// Add Blog page
 app.get("/blog", (req, res) => {
     res.sendFile(__dirname + "/blog.html");
 });
@@ -42,9 +39,7 @@ app.get("/blog", (req, res) => {
 // ==========================================
 
 app.get("/blogs", (req, res) => {
-
     res.json(blogs);
-
 });
 
 
@@ -59,21 +54,18 @@ app.get("/blogs/:id", (req, res) => {
     const blog = blogs.find(blog => blog.id === id);
 
     if (!blog) {
-
         return res.status(404).json({
             success: false,
             message: "Blog not found."
         });
-
     }
 
     res.json(blog);
-
 });
 
 
 // ==========================================
-// ADD NEW BLOG
+// ADD BLOG
 // ==========================================
 
 app.post("/blogs", (req, res) => {
@@ -81,21 +73,17 @@ app.post("/blogs", (req, res) => {
     const { title, content } = req.body;
 
     if (!title || !content) {
-
         return res.status(400).json({
             success: false,
             message: "Please enter both title and content."
         });
-
     }
 
     const newBlog = {
         id: blogs.length > 0
             ? Math.max(...blogs.map(blog => blog.id)) + 1
             : 1,
-
         title: title,
-
         content: content
     };
 
@@ -106,7 +94,6 @@ app.post("/blogs", (req, res) => {
         message: "Blog added successfully!",
         blog: newBlog
     });
-
 });
 
 
@@ -123,25 +110,20 @@ app.put("/blogs/:id", (req, res) => {
     const blog = blogs.find(blog => blog.id === id);
 
     if (!blog) {
-
         return res.status(404).json({
             success: false,
             message: "Blog not found."
         });
-
     }
 
     if (!title || !content) {
-
         return res.status(400).json({
             success: false,
             message: "Please enter both title and content."
         });
-
     }
 
     blog.title = title;
-
     blog.content = content;
 
     res.json({
@@ -149,7 +131,6 @@ app.put("/blogs/:id", (req, res) => {
         message: "Blog updated successfully!",
         blog: blog
     });
-
 });
 
 
@@ -166,12 +147,10 @@ app.delete("/blogs/:id", (req, res) => {
     );
 
     if (blogIndex === -1) {
-
         return res.status(404).json({
             success: false,
             message: "Blog not found."
         });
-
     }
 
     const deletedBlog = blogs.splice(blogIndex, 1)[0];
@@ -181,7 +160,6 @@ app.delete("/blogs/:id", (req, res) => {
         message: "Blog deleted successfully!",
         blog: deletedBlog
     });
-
 });
 
 
@@ -190,9 +168,5 @@ app.delete("/blogs/:id", (req, res) => {
 // ==========================================
 
 app.listen(PORT, () => {
-
-    console.log(
-        `Server running at http://localhost:${PORT}`
-    );
-
+    console.log(`Server running at http://localhost:${PORT}`);
 });

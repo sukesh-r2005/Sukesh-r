@@ -12,9 +12,7 @@ body {
 }
 
 
-/* =========================
-   NAVIGATION
-========================= */
+/* Navigation */
 
 header {
     background: #333;
@@ -39,9 +37,7 @@ nav a:hover {
 }
 
 
-/* =========================
-   HERO
-========================= */
+/* Hero */
 
 .hero {
     text-align: center;
@@ -57,46 +53,34 @@ nav a:hover {
 }
 
 
-/* =========================
-   BLOG SECTION
-========================= */
+/* Blog section */
 
 .blogs-section {
     width: 80%;
     max-width: 900px;
-
     margin: 20px auto;
-
     text-align: center;
 }
 
 .blogs-section h2 {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 
-/* =========================
-   BLOG LIST
-========================= */
+/* Blog list */
 
 #blogList {
     display: flex;
-
     flex-direction: column;
-
     gap: 20px;
 }
 
 
-/* =========================
-   BLOG CARD
-========================= */
+/* Blog card */
 
 .blog-card {
     background: white;
-
     padding: 20px;
-
     border-radius: 10px;
 
     box-shadow:
@@ -107,24 +91,19 @@ nav a:hover {
 
 .blog-card h3 {
     color: #007BFF;
-
     margin-bottom: 10px;
 }
 
 .blog-card p {
     line-height: 1.6;
-
     margin-bottom: 15px;
 }
 
 
-/* =========================
-   BUTTON
-========================= */
+/* Buttons */
 
 button {
     background: #007BFF;
-
     color: white;
 
     border: none;
@@ -143,13 +122,10 @@ button:hover {
 }
 
 
-/* =========================
-   EDIT BUTTON
-========================= */
+/* Edit */
 
 .edit-button {
     background: #28a745;
-
     margin-right: 10px;
 }
 
@@ -158,9 +134,7 @@ button:hover {
 }
 
 
-/* =========================
-   DELETE BUTTON
-========================= */
+/* Delete */
 
 .delete-button {
     background: #dc3545;
@@ -171,13 +145,10 @@ button:hover {
 }
 
 
-/* =========================
-   CANCEL BUTTON
-========================= */
+/* Cancel */
 
 .cancel-button {
     background: #6c757d;
-
     margin-left: 10px;
 }
 
@@ -186,13 +157,10 @@ button:hover {
 }
 
 
-/* =========================
-   ADD BLOG CONTAINER
-========================= */
+/* Form container */
 
 .container {
     width: 80%;
-
     max-width: 700px;
 
     margin: 40px auto;
@@ -201,9 +169,7 @@ button:hover {
 }
 
 
-/* =========================
-   FORMS
-========================= */
+/* Forms */
 
 form {
     margin-top: 20px;
@@ -229,27 +195,28 @@ textarea {
 }
 
 
-/* =========================
-   MESSAGE
-========================= */
+/* Messages */
 
 #message,
 #editMessage {
     margin-top: 15px;
-
     font-weight: bold;
 }
 
 
-/* =========================
-   EDIT SECTION
-========================= */
+/* Loading */
+
+#loadingMessage {
+    margin: 20px;
+}
+
+
+/* Edit section */
 
 .edit-section {
     display: none;
 
     width: 80%;
-
     max-width: 700px;
 
     margin: 40px auto;
@@ -266,14 +233,11 @@ textarea {
 
 .edit-section h2 {
     text-align: center;
-
     margin-bottom: 15px;
 }
 
 
-/* =========================
-   FOOTER
-========================= */
+/* Footer */
 
 footer {
     margin-top: 50px;
