@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Home - My Blog</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body id="top">
+
+<header>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="blog.html">Blog</a>
+
+        <a href="#blogs">Blogs</a>
+
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>Welcome to My Blog Website</h1>
+
+        <p>
+            View, add, edit and delete blog posts.
+        </p>
+
+        <a href="#blogs" class="hero-button">
+            Explore Blogs
+        </a>
+
+    </div>
+
+</section>
+
+
+<section id="blogs" class="blogs-section">
+
+    <h2>All Blog Posts</h2>
+
+    <p id="loadingMessage">
+        Loading blogs...
+    </p>
+
+    <div id="blogList"></div>
+
+</section>
+
+
+<!-- Edit Blog -->
+
+<section id="editSection" class="edit-section">
+
+    <h2>Edit Blog</h2>
+
+    <form id="editForm">
+
+        <input
+            type="hidden"
+            id="editId"
+        >
+
+        <input
+            type="text"
+            id="editTitle"
+            placeholder="Blog Title"
+            required
+        >
+
+        <textarea
+            id="editContent"
+            rows="6"
+            placeholder="Blog Content"
+            required
+        ></textarea>
+
+        <div class="form-buttons">
+
+            <button type="submit">
+                Update Blog
+            </button>
+
+            <button
+                type="button"
+                id="cancelEdit"
+                class="cancel-button"
+            >
+                Cancel
+            </button>
+
+        </div>
+
+    </form>
+
+    <p id="editMessage"></p>
+
+</section>
+
+
+<footer>
+
+    <p>© 2026 My Blog</p>
+
+    <p class="disclaimer">
+        Educational project using GitHub Pages.
+    </p>
+
+    <a href="#top" class="back-top">
+        Back to Top ↑
+    </a>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
