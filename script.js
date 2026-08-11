@@ -1,30 +1,35 @@
-// ======================================
-// LOAD BLOGS
-// ======================================
+// ==========================================
+// LOAD ALL BLOGS
+// ==========================================
 
 async function loadBlogs() {
 
-    const blogList = document.getElementById("blogList");
+    const blogList =
+        document.getElementById("blogList");
 
-    // If blogList doesn't exist, stop
     if (!blogList) {
         return;
     }
 
     try {
 
-        const response = await fetch("/blogs");
+        const response =
+            await fetch("/blogs");
 
-        const blogs = await response.json();
+        const blogs =
+            await response.json();
 
         blogList.innerHTML = "";
 
+
         if (blogs.length === 0) {
 
-            blogList.innerHTML = "<p>No blog posts available.</p>";
+            blogList.innerHTML =
+                "<p>No blog posts available.</p>";
 
             return;
         }
+
 
         blogs.forEach(blog => {
 
@@ -32,15 +37,26 @@ async function loadBlogs() {
 
                 <div class="blog-card">
 
-                    <h3>${blog.title}</h3>
+                    <h3>
+                        ${blog.title}
+                    </h3>
 
-                    <p>${blog.content}</p>
+                    <p>
+                        ${blog.content}
+                    </p>
 
                     <button
                         class="edit-button"
                         onclick="editBlog(${blog.id})"
                     >
                         Edit
+                    </button>
+
+                    <button
+                        class="delete-button"
+                        onclick="deleteBlog(${blog.id})"
+                    >
+                        Delete
                     </button>
 
                 </div>
@@ -59,96 +75,115 @@ async function loadBlogs() {
 }
 
 
-// ======================================
+// ==========================================
 // ADD BLOG
-// ======================================
+// ==========================================
 
-const blogForm = document.getElementById("blogForm");
+const blogForm =
+    document.getElementById("blogForm");
 
 if (blogForm) {
 
-    blogForm.addEventListener("submit", async function (event) {
+    blogForm.addEventListener(
+        "submit",
+        async function (event) {
 
-        event.preventDefault();
-
-        const title =
-            document.getElementById("title").value.trim();
-
-        const content =
-            document.getElementById("content").value.trim();
-
-        const message =
-            document.getElementById("message");
+            event.preventDefault();
 
 
-        if (title === "" || content === "") {
-
-            message.style.color = "red";
-
-            message.innerText =
-                "Please fill all fields.";
-
-            return;
-        }
+            const title =
+                document
+                    .getElementById("title")
+                    .value
+                    .trim();
 
 
-        try {
-
-            const response = await fetch("/blogs", {
-
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-                    title: title,
-                    content: content
-                })
-
-            });
+            const content =
+                document
+                    .getElementById("content")
+                    .value
+                    .trim();
 
 
-            const data = await response.json();
+            const message =
+                document.getElementById("message");
 
 
-            if (response.ok) {
-
-                message.style.color = "green";
-
-                message.innerText =
-                    "Blog added successfully!";
-
-                blogForm.reset();
-
-            } else {
+            if (title === "" || content === "") {
 
                 message.style.color = "red";
 
                 message.innerText =
-                    data.message;
+                    "Please fill all fields.";
 
+                return;
             }
 
-        } catch (error) {
 
-            message.style.color = "red";
+            try {
 
-            message.innerText =
-                "Something went wrong.";
+                const response =
+                    await fetch("/blogs", {
 
-            console.error(error);
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            title: title,
+                            content: content
+                        })
+
+                    });
+
+
+                const data =
+                    await response.json();
+
+
+                if (response.ok) {
+
+                    message.style.color =
+                        "green";
+
+                    message.innerText =
+                        "Blog added successfully!";
+
+
+                    blogForm.reset();
+
+                } else {
+
+                    message.style.color =
+                        "red";
+
+                    message.innerText =
+                        data.message;
+
+                }
+
+            } catch (error) {
+
+                message.style.color =
+                    "red";
+
+                message.innerText =
+                    "Something went wrong.";
+
+                console.error(error);
+            }
+
         }
-
-    });
-
+    );
 }
 
 
-// ======================================
+// ==========================================
 // EDIT BLOG
-// ======================================
+// ==========================================
 
 async function editBlog(id) {
 
@@ -157,79 +192,78 @@ async function editBlog(id) {
         const response =
             await fetch(`/blogs/${id}`);
 
-        /*
-        The server currently has no separate
-        GET /blogs/:id requirement, so we get
-        all blogs and find the selected one.
-        */
 
         if (!response.ok) {
 
-            throw new Error("Unable to get blog.");
+            throw new Error(
+                "Blog not found."
+            );
 
         }
+
+
+        const blog =
+            await response.json();
+
+
+        const editSection =
+            document.getElementById(
+                "editSection"
+            );
+
+
+        const editId =
+            document.getElementById(
+                "editId"
+            );
+
+
+        const editTitle =
+            document.getElementById(
+                "editTitle"
+            );
+
+
+        const editContent =
+            document.getElementById(
+                "editContent"
+            );
+
+
+        editId.value =
+            blog.id;
+
+
+        editTitle.value =
+            blog.title;
+
+
+        editContent.value =
+            blog.content;
+
+
+        editSection.style.display =
+            "block";
+
+
+        editSection.scrollIntoView({
+            behavior: "smooth"
+        });
+
 
     } catch (error) {
 
-        // Get all blogs instead
-        const response =
-            await fetch("/blogs");
+        alert("Unable to load blog.");
 
-        const blogs =
-            await response.json();
+        console.error(error);
 
-        const blog =
-            blogs.find(blog => blog.id === id);
-
-        if (!blog) {
-
-            alert("Blog not found.");
-
-            return;
-        }
-
-        openEditForm(blog);
     }
 }
 
 
-// ======================================
-// OPEN EDIT FORM
-// ======================================
-
-function openEditForm(blog) {
-
-    const editSection =
-        document.getElementById("editSection");
-
-    const editId =
-        document.getElementById("editId");
-
-    const editTitle =
-        document.getElementById("editTitle");
-
-    const editContent =
-        document.getElementById("editContent");
-
-
-    editId.value = blog.id;
-
-    editTitle.value = blog.title;
-
-    editContent.value = blog.content;
-
-
-    editSection.style.display = "block";
-
-    editSection.scrollIntoView({
-        behavior: "smooth"
-    });
-}
-
-
-// ======================================
+// ==========================================
 // UPDATE BLOG
-// ======================================
+// ==========================================
 
 const editForm =
     document.getElementById("editForm");
@@ -244,25 +278,35 @@ if (editForm) {
 
 
             const id =
-                document.getElementById("editId").value;
+                document
+                    .getElementById("editId")
+                    .value;
+
 
             const title =
-                document.getElementById("editTitle")
-                .value
-                .trim();
+                document
+                    .getElementById("editTitle")
+                    .value
+                    .trim();
+
 
             const content =
-                document.getElementById("editContent")
-                .value
-                .trim();
+                document
+                    .getElementById("editContent")
+                    .value
+                    .trim();
+
 
             const editMessage =
-                document.getElementById("editMessage");
+                document.getElementById(
+                    "editMessage"
+                );
 
 
             if (title === "" || content === "") {
 
-                editMessage.style.color = "red";
+                editMessage.style.color =
+                    "red";
 
                 editMessage.innerText =
                     "Please fill all fields.";
@@ -273,23 +317,25 @@ if (editForm) {
 
             try {
 
-                const response = await fetch(
-                    `/blogs/${id}`,
-                    {
+                const response =
+                    await fetch(
+                        `/blogs/${id}`,
+                        {
 
-                        method: "PUT",
+                            method: "PUT",
 
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
 
-                        body: JSON.stringify({
-                            title: title,
-                            content: content
-                        })
+                            body: JSON.stringify({
+                                title: title,
+                                content: content
+                            })
 
-                    }
-                );
+                        }
+                    );
 
 
                 const data =
@@ -304,10 +350,10 @@ if (editForm) {
                     editMessage.innerText =
                         "Blog updated successfully!";
 
-                    // Reload blogs
-                    loadBlogs();
 
-                    // Hide form after update
+                    await loadBlogs();
+
+
                     setTimeout(() => {
 
                         document.getElementById(
@@ -315,6 +361,7 @@ if (editForm) {
                         ).style.display = "none";
 
                     }, 1000);
+
 
                 } else {
 
@@ -339,32 +386,97 @@ if (editForm) {
 
         }
     );
-
 }
 
 
-// ======================================
+// ==========================================
 // CANCEL EDIT
-// ======================================
+// ==========================================
 
 const cancelEdit =
-    document.getElementById("cancelEdit");
+    document.getElementById(
+        "cancelEdit"
+    );
 
 if (cancelEdit) {
 
-    cancelEdit.addEventListener("click", function () {
+    cancelEdit.addEventListener(
+        "click",
+        function () {
 
-        document.getElementById(
-            "editSection"
-        ).style.display = "none";
+            document.getElementById(
+                "editSection"
+            ).style.display = "none";
 
-    });
-
+        }
+    );
 }
 
 
-// ======================================
-// LOAD BLOGS WHEN PAGE OPENS
-// ======================================
+// ==========================================
+// DELETE BLOG
+// ==========================================
+
+async function deleteBlog(id) {
+
+    const confirmation =
+        confirm(
+            "Are you sure you want to delete this blog?"
+        );
+
+
+    if (!confirmation) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                `/blogs/${id}`,
+                {
+
+                    method: "DELETE"
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (response.ok) {
+
+            alert(
+                "Blog deleted successfully!"
+            );
+
+            loadBlogs();
+
+        } else {
+
+            alert(data.message);
+
+        }
+
+    } catch (error) {
+
+        alert(
+            "Unable to delete the blog."
+        );
+
+        console.error(error);
+
+    }
+}
+
+
+// ==========================================
+// LOAD BLOGS WHEN HOME PAGE OPENS
+// ==========================================
 
 loadBlogs();

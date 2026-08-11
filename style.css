@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -10,7 +11,10 @@ body {
     color: #333;
 }
 
-/* Navigation */
+
+/* =========================
+   NAVIGATION
+========================= */
 
 header {
     background: #333;
@@ -34,7 +38,10 @@ nav a:hover {
     color: #00bfff;
 }
 
-/* Hero */
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
     text-align: center;
@@ -49,12 +56,17 @@ nav a:hover {
     color: #555;
 }
 
-/* Blog Section */
+
+/* =========================
+   BLOG SECTION
+========================= */
 
 .blogs-section {
     width: 80%;
     max-width: 900px;
+
     margin: 20px auto;
+
     text-align: center;
 }
 
@@ -62,41 +74,67 @@ nav a:hover {
     margin-bottom: 25px;
 }
 
-/* Blog Cards */
+
+/* =========================
+   BLOG LIST
+========================= */
 
 #blogList {
     display: flex;
+
     flex-direction: column;
+
     gap: 20px;
 }
 
+
+/* =========================
+   BLOG CARD
+========================= */
+
 .blog-card {
     background: white;
+
     padding: 20px;
+
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.15);
+
     text-align: left;
 }
 
 .blog-card h3 {
     color: #007BFF;
+
     margin-bottom: 10px;
 }
 
 .blog-card p {
     line-height: 1.6;
+
     margin-bottom: 15px;
 }
 
-/* Buttons */
+
+/* =========================
+   BUTTON
+========================= */
 
 button {
     background: #007BFF;
+
     color: white;
+
     border: none;
+
     padding: 10px 20px;
+
     border-radius: 5px;
+
     cursor: pointer;
+
     font-size: 15px;
 }
 
@@ -104,37 +142,68 @@ button:hover {
     background: #0056b3;
 }
 
-/* Edit Button */
+
+/* =========================
+   EDIT BUTTON
+========================= */
 
 .edit-button {
     background: #28a745;
+
+    margin-right: 10px;
 }
 
 .edit-button:hover {
     background: #1e7e34;
 }
 
-/* Cancel Button */
+
+/* =========================
+   DELETE BUTTON
+========================= */
+
+.delete-button {
+    background: #dc3545;
+}
+
+.delete-button:hover {
+    background: #bd2130;
+}
+
+
+/* =========================
+   CANCEL BUTTON
+========================= */
 
 .cancel-button {
-    background: #dc3545;
+    background: #6c757d;
+
     margin-left: 10px;
 }
 
 .cancel-button:hover {
-    background: #bd2130;
+    background: #545b62;
 }
 
-/* Add Blog Container */
+
+/* =========================
+   ADD BLOG CONTAINER
+========================= */
 
 .container {
     width: 80%;
+
     max-width: 700px;
+
     margin: 40px auto;
+
     text-align: center;
 }
 
-/* Forms */
+
+/* =========================
+   FORMS
+========================= */
 
 form {
     margin-top: 20px;
@@ -143,10 +212,15 @@ form {
 input,
 textarea {
     width: 100%;
+
     padding: 12px;
+
     margin: 10px 0;
+
     border: 1px solid #ccc;
+
     border-radius: 5px;
+
     font-size: 16px;
 }
 
@@ -154,38 +228,61 @@ textarea {
     resize: vertical;
 }
 
-/* Messages */
+
+/* =========================
+   MESSAGE
+========================= */
 
 #message,
 #editMessage {
     margin-top: 15px;
+
     font-weight: bold;
 }
 
-/* Edit Section */
+
+/* =========================
+   EDIT SECTION
+========================= */
 
 .edit-section {
     display: none;
+
     width: 80%;
+
     max-width: 700px;
+
     margin: 40px auto;
+
     padding: 25px;
+
     background: white;
+
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .edit-section h2 {
     text-align: center;
+
     margin-bottom: 15px;
 }
 
-/* Footer */
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
     margin-top: 50px;
+
     background: #333;
+
     color: white;
+
     text-align: center;
+
     padding: 15px;
 }
