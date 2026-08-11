@@ -1,6 +1,5 @@
 // ==========================================
 // LOAD ALL BLOGS
-// GET /blogs
 // ==========================================
 
 async function loadBlogs() {
@@ -11,7 +10,6 @@ async function loadBlogs() {
     const loadingMessage =
         document.getElementById("loadingMessage");
 
-    // Only run on Home page
     if (!blogList) {
         return;
     }
@@ -22,7 +20,7 @@ async function loadBlogs() {
             await fetch("/blogs");
 
         if (!response.ok) {
-            throw new Error("Failed to fetch blogs");
+            throw new Error("Failed to fetch blogs.");
         }
 
         const blogs =
@@ -34,7 +32,6 @@ async function loadBlogs() {
             loadingMessage.style.display = "none";
         }
 
-
         if (blogs.length === 0) {
 
             blogList.innerHTML =
@@ -43,38 +40,36 @@ async function loadBlogs() {
             return;
         }
 
-
         blogs.forEach(blog => {
 
-            blogList.innerHTML += `
+            const card =
+                document.createElement("div");
 
-                <div class="blog-card">
+            card.className = "blog-card";
 
-                    <h3>
-                        ${blog.title}
-                    </h3>
+            card.innerHTML = `
 
-                    <p>
-                        ${blog.content}
-                    </p>
+                <h3>${blog.title}</h3>
 
-                    <button
-                        class="edit-button"
-                        onclick="editBlog(${blog.id})"
-                    >
-                        Edit
-                    </button>
+                <p>${blog.content}</p>
 
-                    <button
-                        class="delete-button"
-                        onclick="deleteBlog(${blog.id})"
-                    >
-                        Delete
-                    </button>
+                <button
+                    class="edit-button"
+                    onclick="editBlog(${blog.id})"
+                >
+                    Edit
+                </button>
 
-                </div>
+                <button
+                    class="delete-button"
+                    onclick="deleteBlog(${blog.id})"
+                >
+                    Delete
+                </button>
 
             `;
+
+            blogList.appendChild(card);
 
         });
 
@@ -92,7 +87,6 @@ async function loadBlogs() {
 
 // ==========================================
 // ADD BLOG
-// POST /blogs
 // ==========================================
 
 const blogForm =
@@ -106,13 +100,11 @@ if (blogForm) {
 
             event.preventDefault();
 
-
             const title =
                 document
                     .getElementById("title")
                     .value
                     .trim();
-
 
             const content =
                 document
@@ -120,10 +112,8 @@ if (blogForm) {
                     .value
                     .trim();
 
-
             const message =
                 document.getElementById("message");
-
 
             if (title === "" || content === "") {
 
@@ -134,7 +124,6 @@ if (blogForm) {
 
                 return;
             }
-
 
             try {
 
@@ -155,34 +144,25 @@ if (blogForm) {
 
                     });
 
-
                 const data =
                     await response.json();
 
-
                 if (!response.ok) {
-
                     throw new Error(
                         data.message
                     );
-
                 }
 
-
-                message.style.color =
-                    "green";
+                message.style.color = "green";
 
                 message.innerText =
                     data.message;
 
-
                 blogForm.reset();
-
 
             } catch (error) {
 
-                message.style.color =
-                    "red";
+                message.style.color = "red";
 
                 message.innerText =
                     error.message;
@@ -196,8 +176,7 @@ if (blogForm) {
 
 
 // ==========================================
-// GET SINGLE BLOG
-// GET /blogs/:id
+// EDIT BLOG
 // ==========================================
 
 async function editBlog(id) {
@@ -207,49 +186,35 @@ async function editBlog(id) {
         const response =
             await fetch(`/blogs/${id}`);
 
-
         if (!response.ok) {
-
-            throw new Error(
-                "Blog not found."
-            );
-
+            throw new Error("Blog not found.");
         }
-
 
         const blog =
             await response.json();
-
 
         document.getElementById(
             "editId"
         ).value = blog.id;
 
-
         document.getElementById(
             "editTitle"
         ).value = blog.title;
 
-
         document.getElementById(
             "editContent"
         ).value = blog.content;
-
 
         const editSection =
             document.getElementById(
                 "editSection"
             );
 
-
-        editSection.style.display =
-            "block";
-
+        editSection.style.display = "block";
 
         editSection.scrollIntoView({
             behavior: "smooth"
         });
-
 
     } catch (error) {
 
@@ -262,7 +227,6 @@ async function editBlog(id) {
 
 // ==========================================
 // UPDATE BLOG
-// PUT /blogs/:id
 // ==========================================
 
 const editForm =
@@ -276,12 +240,10 @@ if (editForm) {
 
             event.preventDefault();
 
-
             const id =
                 document
                     .getElementById("editId")
                     .value;
-
 
             const title =
                 document
@@ -289,19 +251,16 @@ if (editForm) {
                     .value
                     .trim();
 
-
             const content =
                 document
                     .getElementById("editContent")
                     .value
                     .trim();
 
-
             const editMessage =
                 document.getElementById(
                     "editMessage"
                 );
-
 
             if (title === "" || content === "") {
 
@@ -313,7 +272,6 @@ if (editForm) {
 
                 return;
             }
-
 
             try {
 
@@ -337,19 +295,14 @@ if (editForm) {
                         }
                     );
 
-
                 const data =
                     await response.json();
 
-
                 if (!response.ok) {
-
                     throw new Error(
                         data.message
                     );
-
                 }
-
 
                 editMessage.style.color =
                     "green";
@@ -357,9 +310,7 @@ if (editForm) {
                 editMessage.innerText =
                     data.message;
 
-
                 await loadBlogs();
-
 
                 setTimeout(() => {
 
@@ -368,7 +319,6 @@ if (editForm) {
                     ).style.display = "none";
 
                 }, 1000);
-
 
             } catch (error) {
 
@@ -412,7 +362,6 @@ if (cancelEdit) {
 
 // ==========================================
 // DELETE BLOG
-// DELETE /blogs/:id
 // ==========================================
 
 async function deleteBlog(id) {
@@ -422,11 +371,9 @@ async function deleteBlog(id) {
             "Are you sure you want to delete this blog?"
         );
 
-
     if (!confirmation) {
         return;
     }
-
 
     try {
 
@@ -438,24 +385,18 @@ async function deleteBlog(id) {
                 }
             );
 
-
         const data =
             await response.json();
 
-
         if (!response.ok) {
-
             throw new Error(
                 data.message
             );
-
         }
-
 
         alert(data.message);
 
         await loadBlogs();
-
 
     } catch (error) {
 
@@ -467,7 +408,7 @@ async function deleteBlog(id) {
 
 
 // ==========================================
-// LOAD BLOGS WHEN HOME PAGE OPENS
+// LOAD BLOGS WHEN PAGE OPENS
 // ==========================================
 
 loadBlogs();

@@ -9,7 +9,7 @@ app.use(express.json());
 // Serve frontend files
 app.use(express.static(__dirname));
 
-// In-memory blog data
+// Blog data
 let blogs = [
     {
         id: 1,
@@ -18,35 +18,22 @@ let blogs = [
     }
 ];
 
-
-// ==========================================
-// FRONTEND PAGES
-// ==========================================
-
 // Home page
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
-// Add Blog page
+// Blog page
 app.get("/blog", (req, res) => {
     res.sendFile(__dirname + "/blog.html");
 });
 
-
-// ==========================================
-// GET ALL BLOGS
-// ==========================================
-
+// GET all blogs
 app.get("/blogs", (req, res) => {
     res.json(blogs);
 });
 
-
-// ==========================================
-// GET SINGLE BLOG
-// ==========================================
-
+// GET single blog
 app.get("/blogs/:id", (req, res) => {
 
     const id = parseInt(req.params.id);
@@ -63,11 +50,7 @@ app.get("/blogs/:id", (req, res) => {
     res.json(blog);
 });
 
-
-// ==========================================
-// ADD BLOG
-// ==========================================
-
+// POST - Add blog
 app.post("/blogs", (req, res) => {
 
     const { title, content } = req.body;
@@ -96,11 +79,7 @@ app.post("/blogs", (req, res) => {
     });
 });
 
-
-// ==========================================
-// EDIT BLOG
-// ==========================================
-
+// PUT - Edit blog
 app.put("/blogs/:id", (req, res) => {
 
     const id = parseInt(req.params.id);
@@ -133,11 +112,7 @@ app.put("/blogs/:id", (req, res) => {
     });
 });
 
-
-// ==========================================
-// DELETE BLOG
-// ==========================================
-
+// DELETE - Delete blog
 app.delete("/blogs/:id", (req, res) => {
 
     const id = parseInt(req.params.id);
@@ -162,11 +137,7 @@ app.delete("/blogs/:id", (req, res) => {
     });
 });
 
-
-// ==========================================
-// START SERVER
-// ==========================================
-
+// Start server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });

@@ -18,13 +18,15 @@
 
 <body>
 
-    <header>
+    <header id="top">
 
         <nav>
 
-            <a href="/">Home</a>
+            <a href="#top">Home</a>
 
             <a href="/blog">Blog</a>
+
+            <a href="#blogs">Blogs</a>
 
         </nav>
 
@@ -33,14 +35,24 @@
 
     <section class="hero">
 
-        <h1>Welcome to My Blog Website</h1>
+        <div class="hero-content">
 
-        <p>Blogs are loaded from the Express API.</p>
+            <h1>Welcome to My Blog Website</h1>
+
+            <p>
+                Discover, read and manage blog posts.
+            </p>
+
+            <a href="#blogs" class="hero-button">
+                Explore Blogs
+            </a>
+
+        </div>
 
     </section>
 
 
-    <section class="blogs-section">
+    <section id="blogs" class="blogs-section">
 
         <h2>All Blog Posts</h2>
 
@@ -48,14 +60,12 @@
             Loading blogs...
         </p>
 
-        <div id="blogList">
-
-        </div>
+        <div id="blogList"></div>
 
     </section>
 
 
-    <!-- Edit Blog -->
+    <!-- Edit Blog Section -->
 
     <section
         id="editSection"
@@ -85,17 +95,21 @@
                 required
             ></textarea>
 
-            <button type="submit">
-                Update Blog
-            </button>
+            <div class="form-buttons">
 
-            <button
-                type="button"
-                id="cancelEdit"
-                class="cancel-button"
-            >
-                Cancel
-            </button>
+                <button type="submit">
+                    Update Blog
+                </button>
+
+                <button
+                    type="button"
+                    id="cancelEdit"
+                    class="cancel-button"
+                >
+                    Cancel
+                </button>
+
+            </div>
 
         </form>
 
@@ -107,6 +121,10 @@
     <footer>
 
         <p>© 2026 My Blog. All Rights Reserved.</p>
+
+        <a href="#top" class="back-top">
+            Back to Top ↑
+        </a>
 
     </footer>
 
