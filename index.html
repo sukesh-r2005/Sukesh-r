@@ -3,56 +3,107 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>Home - View Blogs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+    <title>Home - My Blog</title>
+
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<header>
+    <header>
 
-<nav>
+        <nav>
 
-<a href="/">Home</a>
+            <a href="/">Home</a>
 
-<a href="/blog">Blog</a>
+            <a href="/blog">Blog</a>
 
-</nav>
+        </nav>
 
-</header>
+    </header>
 
-<section class="hero">
 
-<h1>Welcome to My Blog Website</h1>
+    <section class="hero">
 
-<p>Read all blog posts below.</p>
+        <h1>Welcome to My Blog Website</h1>
 
-</section>
+        <p>View and edit your blog posts.</p>
 
-<section>
+    </section>
 
-<h2>Latest Blog Posts</h2>
 
-<div id="blogList">
+    <section class="blogs-section">
 
-<!-- Blogs will appear here -->
+        <h2>All Blog Posts</h2>
 
-</div>
+        <div id="blogList">
 
-</section>
+            <!-- Blogs will be displayed here -->
 
-<footer>
+        </div>
 
-<p>© 2026 My Blog. All Rights Reserved.</p>
+    </section>
 
-</footer>
 
-<script src="script.js"></script>
+    <!-- Edit Blog Section -->
+
+    <section id="editSection" class="edit-section">
+
+        <h2>Edit Blog</h2>
+
+        <form id="editForm">
+
+            <input
+                type="hidden"
+                id="editId"
+            >
+
+            <input
+                type="text"
+                id="editTitle"
+                placeholder="Blog Title"
+                required
+            >
+
+            <textarea
+                id="editContent"
+                rows="6"
+                placeholder="Blog Content"
+                required
+            ></textarea>
+
+            <button type="submit">
+                Update Blog
+            </button>
+
+            <button
+                type="button"
+                id="cancelEdit"
+                class="cancel-button"
+            >
+                Cancel
+            </button>
+
+        </form>
+
+        <p id="editMessage"></p>
+
+    </section>
+
+
+    <footer>
+
+        <p>© 2026 My Blog. All Rights Reserved.</p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
 
 </body>
 
