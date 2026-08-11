@@ -1,5 +1,9 @@
+const blogList =
+    document.getElementById("blogList");
+
+
 // ==========================================
-// DEFAULT BLOGS
+// DEFAULT DATA
 // ==========================================
 
 const defaultBlogs = [
@@ -12,32 +16,32 @@ const defaultBlogs = [
 
 
 // ==========================================
-// GET BLOGS FROM LOCAL STORAGE
+// STORAGE
 // ==========================================
 
 function getBlogs() {
 
-    const storedBlogs =
+    const stored =
         localStorage.getItem("blogs");
 
-    if (storedBlogs) {
 
-        return JSON.parse(storedBlogs);
+    if (stored) {
+
+        return JSON.parse(stored);
 
     }
+
 
     localStorage.setItem(
         "blogs",
         JSON.stringify(defaultBlogs)
     );
 
-    return defaultBlogs;
+
+    return [...defaultBlogs];
+
 }
 
-
-// ==========================================
-// SAVE BLOGS
-// ==========================================
 
 function saveBlogs(blogs) {
 
@@ -50,35 +54,39 @@ function saveBlogs(blogs) {
 
 
 // ==========================================
-// DISPLAY ALL BLOGS
+// ESCAPE HTML
+// ==========================================
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        value;
+
+    return div.innerHTML;
+
+}
+
+
+// ==========================================
+// DISPLAY BLOGS
 // ==========================================
 
 function loadBlogs() {
-
-    const blogList =
-        document.getElementById("blogList");
-
-    const loadingMessage =
-        document.getElementById(
-            "loadingMessage"
-        );
 
     if (!blogList) {
         return;
     }
 
 
-    const blogs = getBlogs();
+    const blogs =
+        getBlogs();
 
-    blogList.innerHTML = "";
 
-
-    if (loadingMessage) {
-
-        loadingMessage.style.display =
-            "none";
-
-    }
+    blogList.innerHTML =
+        "";
 
 
     if (blogs.length === 0) {
@@ -93,7 +101,10 @@ function loadBlogs() {
     blogs.forEach(blog => {
 
         const card =
-            document.createElement("div");
+            document.createElement(
+                "article"
+            );
+
 
         card.className =
             "blog-card";
@@ -102,11 +113,11 @@ function loadBlogs() {
         card.innerHTML = `
 
             <h3>
-                ${blog.title}
+                ${escapeHTML(blog.title)}
             </h3>
 
             <p>
-                ${blog.content}
+                ${escapeHTML(blog.content)}
             </p>
 
             <button
@@ -138,28 +149,34 @@ function loadBlogs() {
 // ==========================================
 
 const blogForm =
-    document.getElementById("blogForm");
+    document.getElementById(
+        "blogForm"
+    );
 
 
 if (blogForm) {
 
     blogForm.addEventListener(
         "submit",
-        function(event) {
+        event => {
 
             event.preventDefault();
 
 
             const title =
                 document
-                    .getElementById("title")
+                    .getElementById(
+                        "title"
+                    )
                     .value
                     .trim();
 
 
             const content =
                 document
-                    .getElementById("content")
+                    .getElementById(
+                        "content"
+                    )
                     .value
                     .trim();
 
@@ -172,11 +189,11 @@ if (blogForm) {
 
             if (!title || !content) {
 
+                message.textContent =
+                    "Please fill all fields.";
+
                 message.style.color =
                     "red";
-
-                message.innerText =
-                    "Please fill all fields.";
 
                 return;
             }
@@ -186,38 +203,36 @@ if (blogForm) {
                 getBlogs();
 
 
-            const newBlog = {
-
-                id:
-                    blogs.length > 0
-                        ? Math.max(
-                            ...blogs.map(
-                                blog =>
-                                    blog.id
-                            )
-                        ) + 1
-                        : 1,
-
-                title:
-                    title,
-
-                content:
-                    content
-
-            };
+            const newId =
+                blogs.length > 0
+                    ? Math.max(
+                        ...blogs.map(
+                            blog =>
+                                blog.id
+                        )
+                    ) + 1
+                    : 1;
 
 
-            blogs.push(newBlog);
+            blogs.push({
+
+                id: newId,
+
+                title: title,
+
+                content: content
+
+            });
 
 
             saveBlogs(blogs);
 
 
+            message.textContent =
+                "Blog added successfully!";
+
             message.style.color =
                 "green";
-
-            message.innerText =
-                "Blog added successfully!";
 
 
             blogForm.reset();
@@ -240,8 +255,8 @@ function editBlog(id) {
 
     const blog =
         blogs.find(
-            blog =>
-                blog.id === id
+            item =>
+                item.id === id
         );
 
 
@@ -250,6 +265,7 @@ function editBlog(id) {
         alert("Blog not found.");
 
         return;
+
     }
 
 
@@ -262,6 +278,7 @@ function editBlog(id) {
     if (!editSection) {
 
         return;
+
     }
 
 
@@ -308,13 +325,13 @@ if (editForm) {
 
     editForm.addEventListener(
         "submit",
-        function(event) {
+        event => {
 
             event.preventDefault();
 
 
             const id =
-                parseInt(
+                Number(
                     document.getElementById(
                         "editId"
                     ).value
@@ -341,13 +358,14 @@ if (editForm) {
 
             if (!title || !content) {
 
+                message.textContent =
+                    "Please fill all fields.";
+
                 message.style.color =
                     "red";
 
-                message.innerText =
-                    "Please fill all fields.";
-
                 return;
+
             }
 
 
@@ -357,20 +375,21 @@ if (editForm) {
 
             const blog =
                 blogs.find(
-                    blog =>
-                        blog.id === id
+                    item =>
+                        item.id === id
                 );
 
 
             if (!blog) {
 
+                message.textContent =
+                    "Blog not found.";
+
                 message.style.color =
                     "red";
 
-                message.innerText =
-                    "Blog not found.";
-
                 return;
+
             }
 
 
@@ -384,18 +403,18 @@ if (editForm) {
             saveBlogs(blogs);
 
 
+            message.textContent =
+                "Blog updated successfully!";
+
             message.style.color =
                 "green";
-
-            message.innerText =
-                "Blog updated successfully!";
 
 
             loadBlogs();
 
 
             setTimeout(
-                function() {
+                () => {
 
                     document.getElementById(
                         "editSection"
@@ -403,7 +422,7 @@ if (editForm) {
                         "none";
 
                 },
-                1000
+                700
             );
 
         }
@@ -426,7 +445,7 @@ if (cancelEdit) {
 
     cancelEdit.addEventListener(
         "click",
-        function() {
+        () => {
 
             document.getElementById(
                 "editSection"
@@ -445,35 +464,32 @@ if (cancelEdit) {
 
 function deleteBlog(id) {
 
-    const confirmation =
-        confirm(
+    const confirmed =
+        window.confirm(
             "Are you sure you want to delete this blog?"
         );
 
 
-    if (!confirmation) {
+    if (!confirmed) {
 
         return;
 
     }
 
 
-    let blogs =
+    const blogs =
         getBlogs();
 
 
-    blogs =
+    const updatedBlogs =
         blogs.filter(
             blog =>
                 blog.id !== id
         );
 
 
-    saveBlogs(blogs);
-
-
-    alert(
-        "Blog deleted successfully!"
+    saveBlogs(
+        updatedBlogs
     );
 
 
@@ -483,7 +499,7 @@ function deleteBlog(id) {
 
 
 // ==========================================
-// LOAD BLOGS
+// INITIAL LOAD
 // ==========================================
 
 loadBlogs();

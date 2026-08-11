@@ -1,36 +1,50 @@
+const blogList =
+    document.getElementById("blogList");
+
+const loadingMessage =
+    document.getElementById("loadingMessage");
+
+
 // ==========================================
-// LOAD ALL BLOGS
+// LOAD BLOGS
 // ==========================================
 
 async function loadBlogs() {
 
-    const blogList =
-        document.getElementById("blogList");
-
-    const loadingMessage =
-        document.getElementById("loadingMessage");
-
     if (!blogList) {
         return;
     }
+
 
     try {
 
         const response =
             await fetch("/blogs");
 
+
         if (!response.ok) {
-            throw new Error("Failed to fetch blogs.");
+
+            throw new Error(
+                "Unable to load blogs."
+            );
+
         }
+
 
         const blogs =
             await response.json();
 
+
         blogList.innerHTML = "";
 
+
         if (loadingMessage) {
-            loadingMessage.style.display = "none";
+
+            loadingMessage.style.display =
+                "none";
+
         }
+
 
         if (blogs.length === 0) {
 
@@ -40,18 +54,26 @@ async function loadBlogs() {
             return;
         }
 
+
         blogs.forEach(blog => {
 
             const card =
-                document.createElement("div");
+                document.createElement("article");
 
-            card.className = "blog-card";
+
+            card.className =
+                "blog-card";
+
 
             card.innerHTML = `
 
-                <h3>${blog.title}</h3>
+                <h3>
+                    ${escapeHTML(blog.title)}
+                </h3>
 
-                <p>${blog.content}</p>
+                <p>
+                    ${escapeHTML(blog.content)}
+                </p>
 
                 <button
                     class="edit-button"
@@ -69,19 +91,46 @@ async function loadBlogs() {
 
             `;
 
+
             blogList.appendChild(card);
 
         });
 
+
     } catch (error) {
 
+        console.error(error);
+
+
         if (loadingMessage) {
-            loadingMessage.innerText =
+
+            loadingMessage.textContent =
                 "Unable to load blogs.";
+
         }
 
-        console.error(error);
     }
+
+}
+
+
+// ==========================================
+// ESCAPE HTML
+// Prevents HTML injection in blog content
+// ==========================================
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement("div");
+
+
+    div.textContent =
+        value;
+
+
+    return div.innerHTML;
+
 }
 
 
@@ -92,13 +141,15 @@ async function loadBlogs() {
 const blogForm =
     document.getElementById("blogForm");
 
+
 if (blogForm) {
 
     blogForm.addEventListener(
         "submit",
-        async function (event) {
+        async event => {
 
             event.preventDefault();
+
 
             const title =
                 document
@@ -106,77 +157,96 @@ if (blogForm) {
                     .value
                     .trim();
 
+
             const content =
                 document
                     .getElementById("content")
                     .value
                     .trim();
 
+
             const message =
-                document.getElementById("message");
+                document
+                    .getElementById("message");
 
-            if (title === "" || content === "") {
 
-                message.style.color = "red";
+            if (!title || !content) {
 
-                message.innerText =
+                message.textContent =
                     "Please fill all fields.";
+
+                message.style.color =
+                    "red";
 
                 return;
             }
 
+
             try {
 
                 const response =
-                    await fetch("/blogs", {
+                    await fetch(
+                        "/blogs",
+                        {
 
-                        method: "POST",
+                            method: "POST",
 
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
 
-                        body: JSON.stringify({
-                            title: title,
-                            content: content
-                        })
+                            body:
+                                JSON.stringify({
+                                    title,
+                                    content
+                                })
 
-                    });
+                        }
+                    );
+
 
                 const data =
                     await response.json();
 
+
                 if (!response.ok) {
+
                     throw new Error(
                         data.message
                     );
+
                 }
 
-                message.style.color = "green";
 
-                message.innerText =
-                    data.message;
+                message.textContent =
+                    "Blog added successfully!";
+
+                message.style.color =
+                    "green";
+
 
                 blogForm.reset();
 
+
             } catch (error) {
 
-                message.style.color = "red";
-
-                message.innerText =
+                message.textContent =
                     error.message;
 
-                console.error(error);
+                message.style.color =
+                    "red";
+
             }
 
         }
     );
+
 }
 
 
 // ==========================================
-// EDIT BLOG
+// GET SINGLE BLOG
 // ==========================================
 
 async function editBlog(id) {
@@ -184,44 +254,63 @@ async function editBlog(id) {
     try {
 
         const response =
-            await fetch(`/blogs/${id}`);
+            await fetch(
+                `/blogs/${id}`
+            );
+
 
         if (!response.ok) {
-            throw new Error("Blog not found.");
+
+            throw new Error(
+                "Blog not found."
+            );
+
         }
+
 
         const blog =
             await response.json();
 
-        document.getElementById(
-            "editId"
-        ).value = blog.id;
-
-        document.getElementById(
-            "editTitle"
-        ).value = blog.title;
-
-        document.getElementById(
-            "editContent"
-        ).value = blog.content;
 
         const editSection =
             document.getElementById(
                 "editSection"
             );
 
-        editSection.style.display = "block";
+
+        document.getElementById(
+            "editId"
+        ).value =
+            blog.id;
+
+
+        document.getElementById(
+            "editTitle"
+        ).value =
+            blog.title;
+
+
+        document.getElementById(
+            "editContent"
+        ).value =
+            blog.content;
+
+
+        editSection.style.display =
+            "block";
+
 
         editSection.scrollIntoView({
             behavior: "smooth"
         });
 
+
     } catch (error) {
 
         alert(error.message);
 
-        console.error(error);
     }
+
 }
 
 
@@ -230,48 +319,64 @@ async function editBlog(id) {
 // ==========================================
 
 const editForm =
-    document.getElementById("editForm");
+    document.getElementById(
+        "editForm"
+    );
+
 
 if (editForm) {
 
     editForm.addEventListener(
         "submit",
-        async function (event) {
+        async event => {
 
             event.preventDefault();
 
+
             const id =
                 document
-                    .getElementById("editId")
+                    .getElementById(
+                        "editId"
+                    )
                     .value;
+
 
             const title =
                 document
-                    .getElementById("editTitle")
+                    .getElementById(
+                        "editTitle"
+                    )
                     .value
                     .trim();
+
 
             const content =
                 document
-                    .getElementById("editContent")
+                    .getElementById(
+                        "editContent"
+                    )
                     .value
                     .trim();
 
-            const editMessage =
-                document.getElementById(
-                    "editMessage"
-                );
 
-            if (title === "" || content === "") {
+            const message =
+                document
+                    .getElementById(
+                        "editMessage"
+                    );
 
-                editMessage.style.color =
-                    "red";
 
-                editMessage.innerText =
+            if (!title || !content) {
+
+                message.textContent =
                     "Please fill all fields.";
+
+                message.style.color =
+                    "red";
 
                 return;
             }
+
 
             try {
 
@@ -287,52 +392,62 @@ if (editForm) {
                                     "application/json"
                             },
 
-                            body: JSON.stringify({
-                                title: title,
-                                content: content
-                            })
+                            body:
+                                JSON.stringify({
+                                    title,
+                                    content
+                                })
 
                         }
                     );
 
+
                 const data =
                     await response.json();
 
+
                 if (!response.ok) {
+
                     throw new Error(
                         data.message
                     );
+
                 }
 
-                editMessage.style.color =
+
+                message.textContent =
+                    "Blog updated successfully!";
+
+                message.style.color =
                     "green";
 
-                editMessage.innerText =
-                    data.message;
 
                 await loadBlogs();
+
 
                 setTimeout(() => {
 
                     document.getElementById(
                         "editSection"
-                    ).style.display = "none";
+                    ).style.display =
+                        "none";
 
-                }, 1000);
+                }, 700);
+
 
             } catch (error) {
 
-                editMessage.style.color =
-                    "red";
-
-                editMessage.innerText =
+                message.textContent =
                     error.message;
 
-                console.error(error);
+                message.style.color =
+                    "red";
+
             }
 
         }
     );
+
 }
 
 
@@ -345,18 +460,21 @@ const cancelEdit =
         "cancelEdit"
     );
 
+
 if (cancelEdit) {
 
     cancelEdit.addEventListener(
         "click",
-        function () {
+        () => {
 
             document.getElementById(
                 "editSection"
-            ).style.display = "none";
+            ).style.display =
+                "none";
 
         }
     );
+
 }
 
 
@@ -366,14 +484,16 @@ if (cancelEdit) {
 
 async function deleteBlog(id) {
 
-    const confirmation =
-        confirm(
+    const confirmed =
+        window.confirm(
             "Are you sure you want to delete this blog?"
         );
 
-    if (!confirmation) {
+
+    if (!confirmed) {
         return;
     }
+
 
     try {
 
@@ -385,30 +505,34 @@ async function deleteBlog(id) {
                 }
             );
 
+
         const data =
             await response.json();
 
+
         if (!response.ok) {
+
             throw new Error(
                 data.message
             );
+
         }
 
-        alert(data.message);
 
         await loadBlogs();
+
 
     } catch (error) {
 
         alert(error.message);
 
-        console.error(error);
     }
+
 }
 
 
 // ==========================================
-// LOAD BLOGS WHEN PAGE OPENS
+// INITIALIZE
 // ==========================================
 
 loadBlogs();

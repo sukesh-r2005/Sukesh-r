@@ -10,7 +10,12 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Add Blog - My Blog</title>
+    <meta
+        name="description"
+        content="Create a new blog post"
+    >
+
+    <title>My Blog - Add Blog</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -18,46 +23,84 @@
 
 <body>
 
-    <header>
+<header>
 
-        <nav>
+    <nav class="navbar">
 
-            <a href="/">Home</a>
+        <a href="/" class="logo">
+            My Blog
+        </a>
 
-            <a href="/blog">Blog</a>
+        <div class="nav-links">
 
-        </nav>
+            <a href="/">
+                Home
+            </a>
 
-    </header>
+            <a
+                href="/blog"
+                class="active"
+            >
+                Add Blog
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
 
 
-    <section class="container page-animation">
+<main>
 
-        <h1>Add a New Blog</h1>
+    <section class="form-section">
 
-        <p>
-            Create and publish a new blog post.
-        </p>
+        <div class="section-heading">
+
+            <h1>
+                Create a New Blog
+            </h1>
+
+            <p>
+                Share your thoughts with the world.
+            </p>
+
+        </div>
 
 
         <form id="blogForm">
 
+            <label for="title">
+                Blog Title
+            </label>
+
             <input
                 type="text"
                 id="title"
-                placeholder="Enter Blog Title"
+                placeholder="Enter blog title"
                 required
+                maxlength="100"
             >
+
+
+            <label for="content">
+                Blog Content
+            </label>
 
             <textarea
                 id="content"
-                rows="6"
-                placeholder="Enter Blog Content"
+                rows="9"
+                placeholder="Write your blog content..."
                 required
+                maxlength="2000"
             ></textarea>
 
-            <button type="submit">
-                Add Blog
+
+            <button
+                type="submit"
+                class="primary-button"
+            >
+                Publish Blog
             </button>
 
         </form>
@@ -67,19 +110,27 @@
 
     </section>
 
-
-    <footer>
-
-        <p>© 2026 My Blog. All Rights Reserved.</p>
-
-        <a href="/" class="back-top">
-            Back to Home
-        </a>
-
-    </footer>
+</main>
 
 
-    <script src="script.js"></script>
+<footer>
+
+    <p>
+        © 2026 My Blog
+    </p>
+
+    <p class="footer-note">
+        Full Stack Development Project
+    </p>
+
+    <a href="/">
+        ← Back to Home
+    </a>
+
+</footer>
+
+
+<script src="script.js" defer></script>
 
 </body>
 

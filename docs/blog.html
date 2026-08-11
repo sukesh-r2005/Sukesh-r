@@ -5,9 +5,17 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Add Blog - My Blog</title>
+    <meta
+        name="description"
+        content="Create a new blog post"
+    >
+
+    <title>My Blog - Add Blog</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -17,70 +25,115 @@
 
 <header>
 
-    <nav>
+    <nav class="navbar">
 
-        <a href="index.html">Home</a>
+        <a
+            href="index.html"
+            class="logo"
+        >
+            My Blog
+        </a>
 
-        <a href="blog.html">Blog</a>
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a
+                href="blog.html"
+                class="active"
+            >
+                Add Blog
+            </a>
+
+        </div>
 
     </nav>
 
 </header>
 
 
-<section class="container page-animation">
+<main>
 
-    <h1>Add a New Blog</h1>
+    <section class="form-section">
 
-    <p>
-        Create and publish a new blog post.
-    </p>
+        <div class="section-heading">
 
+            <h1>
+                Create a New Blog
+            </h1>
 
-    <form id="blogForm">
+            <p>
+                Share your thoughts with the world.
+            </p>
 
-        <input
-            type="text"
-            id="title"
-            placeholder="Enter Blog Title"
-            required
-        >
-
-        <textarea
-            id="content"
-            rows="6"
-            placeholder="Enter Blog Content"
-            required
-        ></textarea>
-
-        <button type="submit">
-            Add Blog
-        </button>
-
-    </form>
+        </div>
 
 
-    <p id="message"></p>
+        <form id="blogForm">
 
-</section>
+            <label for="title">
+                Blog Title
+            </label>
+
+            <input
+                type="text"
+                id="title"
+                placeholder="Enter blog title"
+                required
+                maxlength="100"
+            >
+
+
+            <label for="content">
+                Blog Content
+            </label>
+
+            <textarea
+                id="content"
+                rows="9"
+                placeholder="Write your blog content..."
+                required
+                maxlength="2000"
+            ></textarea>
+
+
+            <button
+                type="submit"
+                class="primary-button"
+            >
+                Publish Blog
+            </button>
+
+        </form>
+
+
+        <p id="message"></p>
+
+    </section>
+
+</main>
 
 
 <footer>
 
-    <p>© 2026 My Blog</p>
-
-    <p class="disclaimer">
-        Educational project using GitHub Pages.
+    <p>
+        © 2026 My Blog
     </p>
 
-    <a href="index.html" class="back-top">
-        Back to Home
+    <p class="footer-note">
+        GitHub Pages Project
+    </p>
+
+    <a href="index.html">
+        ← Back to Home
     </a>
 
 </footer>
 
 
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 
 </body>
 

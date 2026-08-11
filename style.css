@@ -1,5 +1,5 @@
 /* ==========================================
-   GLOBAL
+   RESET
 ========================================== */
 
 * {
@@ -8,83 +8,103 @@
     box-sizing: border-box;
 }
 
+
+/* ==========================================
+   BASE
+========================================== */
+
 html {
     scroll-behavior: smooth;
 }
 
 body {
-    background: #f4f4f4;
-    color: #333;
-    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+
+    background: #f4f7fb;
+
+    color: #222;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     line-height: 1.6;
 }
 
 
 /* ==========================================
-   NAVIGATION
+   HEADER
 ========================================== */
 
 header {
     position: sticky;
+
     top: 0;
+
     z-index: 1000;
 
-    background: #333;
-
-    padding: 15px 0;
+    background: #1f2937;
 
     box-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.2);
-
-    animation: slideDown 0.7s ease;
+        0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-nav {
+
+.navbar {
+    width: min(92%, 1100px);
+
+    min-height: 64px;
+
+    margin: auto;
+
     display: flex;
-    justify-content: center;
-    gap: 35px;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
 }
 
-nav a {
+
+.logo {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 22px;
+
+    font-weight: bold;
+}
+
+
+.nav-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+
+.nav-links a {
     position: relative;
 
     color: white;
 
     text-decoration: none;
 
-    font-size: 18px;
-
-    font-weight: bold;
+    font-size: 16px;
 
     transition:
-        color 0.3s ease,
-        transform 0.3s ease;
+        color 0.2s ease;
 }
 
-nav a:hover {
-    color: #00bfff;
 
-    transform: translateY(-2px);
-}
-
-nav a::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: -5px;
-
-    width: 0;
-    height: 2px;
-
-    background: #00bfff;
-
-    transition: width 0.3s ease;
-}
-
-nav a:hover::after {
-    width: 100%;
+.nav-links a:hover,
+.nav-links a.active {
+    color: #38bdf8;
 }
 
 
@@ -93,17 +113,15 @@ nav a:hover::after {
 ========================================== */
 
 .hero {
-    min-height: 75vh;
+    min-height: 68vh;
 
-    display: flex;
+    display: grid;
 
-    justify-content: center;
+    place-items: center;
 
-    align-items: center;
+    padding: 70px 20px;
 
     text-align: center;
-
-    padding: 60px 20px;
 
     background:
         linear-gradient(
@@ -113,59 +131,131 @@ nav a:hover::after {
         );
 }
 
+
 .hero-content {
-    animation: fadeUp 1s ease;
+    width: min(100%, 750px);
+
+    animation:
+        fadeUp 0.6s ease;
 }
+
 
 .hero h1 {
-    font-size: 42px;
-
     margin-bottom: 15px;
 
-    animation: fadeIn 1s ease;
+    font-size:
+        clamp(32px, 6vw, 50px);
+
+    line-height: 1.15;
 }
 
+
 .hero p {
-    font-size: 19px;
+    max-width: 600px;
+
+    margin: 0 auto 28px;
 
     color: #555;
 
-    margin-bottom: 25px;
+    font-size:
+        clamp(16px, 2.5vw, 19px);
+}
 
-    animation: fadeIn 1.3s ease;
+
+.hero-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
 }
 
 
 /* ==========================================
-   HERO BUTTON
+   BUTTONS
 ========================================== */
 
-.hero-button {
-    display: inline-block;
+.primary-button,
+.secondary-button,
+.cancel-button,
+.edit-button,
+.delete-button {
+    display: inline-flex;
 
-    background: #007BFF;
+    justify-content: center;
 
-    color: white;
+    align-items: center;
 
-    text-decoration: none;
+    min-height: 42px;
 
-    padding: 12px 25px;
+    padding: 10px 18px;
+
+    border: 0;
 
     border-radius: 6px;
 
+    font-size: 15px;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
     transition:
-        transform 0.3s ease,
-        background 0.3s ease,
-        box-shadow 0.3s ease;
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.hero-button:hover {
+
+.primary-button {
+    background: #007bff;
+
+    color: white;
+}
+
+
+.primary-button:hover {
     background: #0056b3;
 
-    transform: translateY(-4px);
+    transform: translateY(-2px);
 
     box-shadow:
-        0 8px 20px rgba(0, 123, 255, 0.3);
+        0 5px 12px
+        rgba(0, 123, 255, 0.25);
+}
+
+
+.secondary-button {
+    background: white;
+
+    color: #007bff;
+
+    border: 1px solid #007bff;
+}
+
+
+.secondary-button:hover {
+    background: #007bff;
+
+    color: white;
+
+    transform: translateY(-2px);
+}
+
+
+.cancel-button {
+    background: #6c757d;
+
+    color: white;
+}
+
+
+.cancel-button:hover {
+    background: #545b62;
+
+    transform: translateY(-2px);
 }
 
 
@@ -174,21 +264,43 @@ nav a:hover::after {
 ========================================== */
 
 .blogs-section {
-    width: 80%;
-
-    max-width: 900px;
+    width: min(92%, 950px);
 
     margin: 70px auto;
+}
+
+
+.section-heading {
+    margin-bottom: 30px;
 
     text-align: center;
 }
 
-.blogs-section h2 {
-    font-size: 30px;
 
-    margin-bottom: 25px;
+.section-heading h1,
+.section-heading h2 {
+    margin-bottom: 8px;
 
-    animation: fadeIn 0.8s ease;
+    font-size:
+        clamp(26px, 4vw, 34px);
+}
+
+
+.section-heading p {
+    color: #666;
+}
+
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.loading {
+    margin: 20px;
+
+    text-align: center;
+
+    color: #666;
 }
 
 
@@ -197,11 +309,15 @@ nav a:hover::after {
 ========================================== */
 
 #blogList {
-    display: flex;
+    display: grid;
 
-    flex-direction: column;
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(280px, 1fr)
+        );
 
-    gap: 25px;
+    gap: 22px;
 }
 
 
@@ -210,235 +326,93 @@ nav a:hover::after {
 ========================================== */
 
 .blog-card {
-    background: white;
+    padding: 22px;
 
-    padding: 25px;
+    background: white;
 
     border-radius: 12px;
 
-    text-align: left;
-
     box-shadow:
-        0 3px 12px rgba(0, 0, 0, 0.12);
+        0 3px 12px
+        rgba(0, 0, 0, 0.08);
 
-    animation: cardAppear 0.7s ease;
+    animation:
+        cardAppear 0.4s ease;
+
+    overflow-wrap: anywhere;
 
     transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
 
 .blog-card:hover {
-    transform: translateY(-7px);
+    transform: translateY(-4px);
 
     box-shadow:
-        0 12px 25px rgba(0, 0, 0, 0.18);
+        0 9px 20px
+        rgba(0, 0, 0, 0.13);
 }
+
 
 .blog-card h3 {
-    color: #007BFF;
-
     margin-bottom: 10px;
 
-    transition: color 0.3s ease;
+    color: #007bff;
+
+    font-size: 21px;
 }
 
-.blog-card:hover h3 {
-    color: #0056b3;
-}
 
 .blog-card p {
     margin-bottom: 18px;
+
+    color: #444;
+
+    white-space: pre-wrap;
 }
 
-
-/* ==========================================
-   BUTTONS
-========================================== */
-
-button {
-    border: none;
-
-    padding: 11px 20px;
-
-    border-radius: 6px;
-
-    cursor: pointer;
-
-    font-size: 15px;
-
-    background: #007BFF;
-
-    color: white;
-
-    transition:
-        transform 0.25s ease,
-        background 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-button:hover {
-    background: #0056b3;
-
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 5px 12px rgba(0, 0, 0, 0.2);
-}
-
-button:active {
-    transform: translateY(0);
-}
-
-
-/* ==========================================
-   EDIT BUTTON
-========================================== */
 
 .edit-button {
     background: #28a745;
 
-    margin-right: 10px;
+    color: white;
+
+    margin-right: 6px;
 }
+
 
 .edit-button:hover {
     background: #1e7e34;
+
+    transform: translateY(-2px);
 }
 
-
-/* ==========================================
-   DELETE BUTTON
-========================================== */
 
 .delete-button {
     background: #dc3545;
+
+    color: white;
 }
+
 
 .delete-button:hover {
     background: #bd2130;
+
+    transform: translateY(-2px);
 }
 
 
 /* ==========================================
-   CANCEL BUTTON
+   FORM SECTION
 ========================================== */
 
-.cancel-button {
-    background: #6c757d;
-
-    margin-left: 10px;
-}
-
-.cancel-button:hover {
-    background: #545b62;
-}
-
-
-/* ==========================================
-   FORM CONTAINER
-========================================== */
-
-.container {
-    width: 80%;
-
-    max-width: 700px;
+.form-section,
+.edit-section {
+    width: min(92%, 700px);
 
     margin: 70px auto;
-
-    text-align: center;
-}
-
-.page-animation {
-    animation: fadeUp 0.8s ease;
-}
-
-
-/* ==========================================
-   FORMS
-========================================== */
-
-form {
-    margin-top: 25px;
-}
-
-input,
-textarea {
-    width: 100%;
-
-    padding: 13px;
-
-    margin: 10px 0;
-
-    border: 1px solid #ccc;
-
-    border-radius: 6px;
-
-    font-size: 16px;
-
-    outline: none;
-
-    transition:
-        border-color 0.3s ease,
-        box-shadow 0.3s ease,
-        transform 0.2s ease;
-}
-
-input:focus,
-textarea:focus {
-    border-color: #007BFF;
-
-    box-shadow:
-        0 0 0 3px rgba(0, 123, 255, 0.12);
-
-    transform: translateY(-1px);
-}
-
-textarea {
-    resize: vertical;
-}
-
-.form-buttons {
-    margin-top: 10px;
-}
-
-
-/* ==========================================
-   MESSAGES
-========================================== */
-
-#message,
-#editMessage {
-    margin-top: 15px;
-
-    font-weight: bold;
-
-    animation: fadeIn 0.4s ease;
-}
-
-
-/* ==========================================
-   LOADING
-========================================== */
-
-#loadingMessage {
-    margin: 20px;
-
-    animation: pulse 1.5s infinite;
-}
-
-
-/* ==========================================
-   EDIT SECTION
-========================================== */
-
-.edit-section {
-    display: none;
-
-    width: 80%;
-
-    max-width: 700px;
-
-    margin: 50px auto;
 
     padding: 30px;
 
@@ -447,15 +421,101 @@ textarea {
     border-radius: 12px;
 
     box-shadow:
-        0 4px 15px rgba(0, 0, 0, 0.15);
+        0 4px 16px
+        rgba(0, 0, 0, 0.08);
 
-    animation: fadeUp 0.5s ease;
+    animation:
+        fadeUp 0.5s ease;
 }
 
-.edit-section h2 {
+
+.form-section form,
+.edit-section form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+label {
+    margin-top: 8px;
+
+    font-weight: bold;
+}
+
+
+input,
+textarea {
+    width: 100%;
+
+    padding: 12px 13px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    outline: none;
+
+    background: white;
+
+    color: #222;
+
+    font-size: 16px;
+
+    font-family: inherit;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+input:focus,
+textarea:focus {
+    border-color: #007bff;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(0, 123, 255, 0.12);
+}
+
+
+textarea {
+    min-height: 150px;
+
+    resize: vertical;
+}
+
+
+.form-buttons {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 10px;
+}
+
+
+/* ==========================================
+   EDIT
+========================================== */
+
+.edit-section {
+    display: none;
+}
+
+
+#message,
+#editMessage {
+    margin-top: 15px;
+
     text-align: center;
 
-    margin-bottom: 15px;
+    font-weight: bold;
 }
 
 
@@ -466,33 +526,33 @@ textarea {
 footer {
     margin-top: 70px;
 
-    background: #333;
+    padding: 25px 15px;
+
+    background: #1f2937;
 
     color: white;
 
     text-align: center;
-
-    padding: 25px;
 }
 
-.back-top {
+
+footer a {
     display: inline-block;
 
-    margin-top: 10px;
+    margin-top: 8px;
 
-    color: #00bfff;
+    color: #38bdf8;
 
     text-decoration: none;
-
-    transition:
-        transform 0.3s ease,
-        color 0.3s ease;
 }
 
-.back-top:hover {
-    color: white;
 
-    transform: translateY(-2px);
+.footer-note {
+    margin-top: 4px;
+
+    font-size: 12px;
+
+    opacity: 0.7;
 }
 
 
@@ -500,31 +560,20 @@ footer {
    ANIMATIONS
 ========================================== */
 
-@keyframes fadeIn {
-
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-
-}
-
-
 @keyframes fadeUp {
 
     from {
         opacity: 0;
 
-        transform: translateY(30px);
+        transform:
+            translateY(20px);
     }
 
     to {
         opacity: 1;
 
-        transform: translateY(0);
+        transform:
+            translateY(0);
     }
 
 }
@@ -536,50 +585,46 @@ footer {
         opacity: 0;
 
         transform:
-            translateY(25px)
-            scale(0.98);
+            translateY(12px);
     }
 
     to {
         opacity: 1;
 
         transform:
-            translateY(0)
-            scale(1);
+            translateY(0);
     }
 
 }
 
 
-@keyframes slideDown {
+/* ==========================================
+   TABLET
+========================================== */
 
-    from {
-        opacity: 0;
+@media (max-width: 768px) {
 
-        transform: translateY(-100%);
+    .navbar {
+        min-height: 58px;
     }
 
-    to {
-        opacity: 1;
-
-        transform: translateY(0);
+    .nav-links {
+        gap: 16px;
     }
 
-}
+    .hero {
+        min-height: 60vh;
 
-
-@keyframes pulse {
-
-    0% {
-        opacity: 0.4;
+        padding: 55px 18px;
     }
 
-    50% {
-        opacity: 1;
+    .blogs-section {
+        margin-top: 50px;
     }
 
-    100% {
-        opacity: 0.4;
+    .form-section,
+    .edit-section {
+        margin-top: 50px;
     }
 
 }
@@ -591,30 +636,145 @@ footer {
 
 @media (max-width: 600px) {
 
-    nav {
-        gap: 15px;
+    .navbar {
+        width: 94%;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        padding: 12px 0;
+
+        gap: 8px;
     }
 
-    nav a {
-        font-size: 16px;
+
+    .logo {
+        font-size: 20px;
     }
 
-    .hero h1 {
-        font-size: 30px;
+
+    .nav-links {
+        gap: 18px;
     }
 
-    .hero p {
-        font-size: 16px;
+
+    .nav-links a {
+        font-size: 14px;
     }
 
-    .blogs-section,
-    .container,
-    .edit-section {
-        width: 90%;
+
+    .hero {
+        min-height: 55vh;
+
+        padding: 45px 15px;
     }
+
+
+    .hero-buttons {
+        width: 100%;
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .hero-buttons a {
+        width: 100%;
+    }
+
+
+    #blogList {
+        grid-template-columns: 1fr;
+    }
+
 
     .blog-card {
         padding: 18px;
+    }
+
+
+    .blog-card button {
+        width: 100%;
+
+        margin: 5px 0;
+    }
+
+
+    .form-section,
+    .edit-section {
+        width: 94%;
+
+        padding: 22px 18px;
+
+        margin-top: 40px;
+    }
+
+
+    .form-buttons {
+        flex-direction: column;
+    }
+
+
+    .form-buttons button {
+        width: 100%;
+    }
+
+
+    input,
+    textarea {
+        font-size: 16px;
+    }
+
+}
+
+
+/* ==========================================
+   VERY SMALL SCREENS
+========================================== */
+
+@media (max-width: 360px) {
+
+    .nav-links {
+        gap: 12px;
+    }
+
+
+    .nav-links a {
+        font-size: 13px;
+    }
+
+
+    .hero h1 {
+        font-size: 27px;
+    }
+
+
+    .hero p {
+        font-size: 14px;
+    }
+
+}
+
+
+/* ==========================================
+   ACCESSIBILITY
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+
+        transition: none !important;
     }
 
 }

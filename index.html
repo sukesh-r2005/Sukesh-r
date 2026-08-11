@@ -10,69 +10,135 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Home - My Blog</title>
+    <meta
+        name="description"
+        content="A simple full-stack blog application"
+    >
+
+    <title>My Blog - Home</title>
 
     <link rel="stylesheet" href="style.css">
 
 </head>
 
-<body>
+<body id="top">
 
-    <header id="top">
+<header>
 
-        <nav>
+    <nav class="navbar">
 
-            <a href="#top">Home</a>
+        <a href="/" class="logo">
+            My Blog
+        </a>
 
-            <a href="/blog">Blog</a>
+        <div class="nav-links">
 
-            <a href="#blogs">Blogs</a>
+            <a href="/" class="active">
+                Home
+            </a>
 
-        </nav>
+            <a href="/blog">
+                Add Blog
+            </a>
 
-    </header>
+            <a href="#blogs">
+                Blogs
+            </a>
 
+        </div>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <!-- HERO -->
 
     <section class="hero">
 
         <div class="hero-content">
 
-            <h1>Welcome to My Blog Website</h1>
+            <h1>
+                Welcome to My Blog
+            </h1>
 
             <p>
-                Discover, read and manage blog posts.
+                Create, read, edit and manage your blog posts.
             </p>
 
-            <a href="#blogs" class="hero-button">
-                Explore Blogs
-            </a>
+            <div class="hero-buttons">
+
+                <a
+                    href="/blog"
+                    class="primary-button"
+                >
+                    Add New Blog
+                </a>
+
+                <a
+                    href="#blogs"
+                    class="secondary-button"
+                >
+                    View Blogs
+                </a>
+
+            </div>
 
         </div>
 
     </section>
 
 
-    <section id="blogs" class="blogs-section">
+    <!-- BLOGS -->
 
-        <h2>All Blog Posts</h2>
+    <section
+        id="blogs"
+        class="blogs-section"
+    >
 
-        <p id="loadingMessage">
+        <div class="section-heading">
+
+            <h2>
+                All Blog Posts
+            </h2>
+
+            <p>
+                Explore the latest posts.
+            </p>
+
+        </div>
+
+
+        <p
+            id="loadingMessage"
+            class="loading"
+        >
             Loading blogs...
         </p>
+
 
         <div id="blogList"></div>
 
     </section>
 
 
-    <!-- Edit Blog Section -->
+    <!-- EDIT BLOG -->
 
     <section
         id="editSection"
         class="edit-section"
     >
 
-        <h2>Edit Blog</h2>
+        <div class="section-heading">
+
+            <h2>
+                Edit Blog
+            </h2>
+
+        </div>
+
 
         <form id="editForm">
 
@@ -81,23 +147,39 @@
                 id="editId"
             >
 
+
+            <label for="editTitle">
+                Blog Title
+            </label>
+
             <input
                 type="text"
                 id="editTitle"
-                placeholder="Blog Title"
+                placeholder="Enter blog title"
                 required
+                maxlength="100"
             >
+
+
+            <label for="editContent">
+                Blog Content
+            </label>
 
             <textarea
                 id="editContent"
-                rows="6"
-                placeholder="Blog Content"
+                rows="7"
+                placeholder="Enter blog content"
                 required
+                maxlength="2000"
             ></textarea>
+
 
             <div class="form-buttons">
 
-                <button type="submit">
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
                     Update Blog
                 </button>
 
@@ -113,23 +195,32 @@
 
         </form>
 
+
         <p id="editMessage"></p>
 
     </section>
 
-
-    <footer>
-
-        <p>© 2026 My Blog. All Rights Reserved.</p>
-
-        <a href="#top" class="back-top">
-            Back to Top ↑
-        </a>
-
-    </footer>
+</main>
 
 
-    <script src="script.js"></script>
+<footer>
+
+    <p>
+        © 2026 My Blog
+    </p>
+
+    <p class="footer-note">
+        Full Stack Development Project
+    </p>
+
+    <a href="#top">
+        Back to Top ↑
+    </a>
+
+</footer>
+
+
+<script src="script.js" defer></script>
 
 </body>
 
